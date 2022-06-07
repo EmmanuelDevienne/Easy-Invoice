@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Easy Invoice | {% block title %}Title{% endblock%}</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+    <!-- My Custom css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body class="hold-transition sidebar-mini dark-mode">
+<div class="wrapper">
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="{% url 'home' %}" class="brand-link">
+            <img src="{% static 'main/mediafiles/logo/invoice.png' %}" alt="Easy invoice Logo"
+                 class="brand-image img-circle elevation-3" style="opacity: .8">
+            <span class="brand-text font-weight-light">Easy Invoice</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="{{ user.profile_image.url }}" class="img-circle elevation-2" alt="">
+                </div>
+                <div class="info">
+                    <a href="{% url 'accounts:profile' %}" class="d-block">{{ user }}</a>
+                </div>
+            </div>
+
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                         with font-awesome or any other icon font library -->
+                    <li class="nav-item">
+                        <a href="#" class="nav-link"><i class="nav-icon fas fa-chart-bar"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link"><i class="nav-icon fas fa-cart-arrow-down"></i>
+                            <p>Products / Services</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link"><i class="nav-icon fas fa-address-card"></i>
+                            <p>Clients</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link"><i class="nav-icon fas fa-file-invoice"></i>
+                            <p>Invoices</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-header"><br>SETTINGS</li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link"><i class="nav-icon far fa-building"></i>
+                            <p>Compagny</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'accounts:logout' %}" class="nav-link"><i
+                                class="nav-icon fas fa-sign-out-alt"></i>
+                            <p>Logout</p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-12">
+                        <h1 class="m-0 border-bottom"><br><br>{% block title_section %}Titre de section{% endblock %}
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <div class="text-center">
+            <strong>Copyright &copy; {% now "Y" %} <a href="{% url 'home'}">Easy Invoice</a>.</strong> All rights
+            reserved.
+        </div>
+    </footer>
+
+    <!-- ./wrapper -->
+</div>
+
+
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'dist/js/adminlte.min.js' %}"></script>
+
+
+<!-- script to change the selected active nav-link -->
+<script>
+$(function () {
+    var url = window.location;
+    // for single sidebar menu
+    $('ul.nav-sidebar a').filter(function () {
+        return this.href == url;
+    }).addClass('active');
+
+    // for sidebar menu and treeview
+    $('ul.nav-treeview a').filter(function () {
+        return this.href == url;
+    }).parentsUntil(".nav-sidebar > .nav-treeview")
+        .css({'display': 'block'})
+        .addClass('menu-open').prev('a')
+        .addClass('active');
+});
+
+</script>
+
+</body>
+</html>
