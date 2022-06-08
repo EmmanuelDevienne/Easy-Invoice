@@ -21,7 +21,7 @@ class Login(LoginView):
     form_class = UserloginForm
 
     def get_success_url(self):
-        return reverse_lazy('accounts:profile')
+        return reverse_lazy('invoice:dashboard')
 
 
 class Logout(LogoutView):
