@@ -27,7 +27,7 @@ class CustomUserManager(BaseUserManager):
             last_name=last_name)
 
         user.set_password(password)
-        print("I use this script ")
+        user.is_superuser = True
         user.is_admin = True
         user.is_staff = True
         user.save()
@@ -40,8 +40,9 @@ def get_image_path(instance, filename):
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
+    is_superuser = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
-    id_admin = models.BooleanField(default=False)
 
     email = models.EmailField(max_length=50, blank=False, unique=True)
     first_name = models.CharField(max_length=50, blank=False, verbose_name="First name")
@@ -72,3 +73,4 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.first_name
+
