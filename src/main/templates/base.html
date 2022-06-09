@@ -14,7 +14,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
   <!-- My Custom css -->
-  <!--  <link rel="stylesheet" href="{% static 'css/style.css' %}">-->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 </head>
 <body class="hold-transition sidebar-mini dark-mode">
@@ -102,22 +102,22 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="{% url 'invoice/dashboard' %}" class="nav-link"><i class="nav-icon fas fa-chart-bar"></i>
-                <p>Dashboard</p>
+            <a href="{% url 'invoice:dashboard' %}" class="nav-link"><i class="nav-icon fas fa-chart-bar"></i>
+              <p>Dashboard</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link"><i class="nav-icon fas fa-cart-arrow-down"></i>
+            <a href="{% url 'invoice:products' %}" class="nav-link"><i class="nav-icon fas fa-cart-arrow-down"></i>
               <p>Products / Services</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link"><i class="nav-icon fas fa-address-card"></i>
+            <a href="{% url 'invoice:clients' %}" class="nav-link"><i class="nav-icon fas fa-address-card"></i>
               <p>Clients</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link"><i class="nav-icon fas fa-file-invoice"></i>
+            <a href="{% url 'invoice:invoices' %}" class="nav-link"><i class="nav-icon fas fa-file-invoice"></i>
               <p>Invoices</p>
             </a>
           </li>
@@ -125,8 +125,8 @@
           <li class="nav-header"><br>SETTINGS</li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link"><i class="nav-icon far fa-building"></i>
-              <p>Compagny</p>
+            <a href="{% url 'invoice:company' %}" class="nav-link"><i class="nav-icon far fa-building"></i>
+              <p>Company</p>
             </a>
           </li>
           <li class="nav-item">
@@ -144,17 +144,6 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-12">
-            <h1 class="m-0">{% block title_section %}Titre de section{% endblock %}</h1>
-            <hr>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
 
     <!-- Main content -->
     <div class="content">
@@ -180,7 +169,7 @@
   <!-- Main Footer -->
   <footer class="main-footer">
     <div class="text-center">
-      <strong>Copyright &copy; {% now "Y" %} <a href="{% url 'home'}">Easy Invoice</a>.</strong> All rights reserved.
+      <strong>Copyright &copy; {% now "Y" %} <a href="{% url 'home' %}">Easy Invoice</a>.</strong> All rights reserved.
     </div>
   </footer>
 </div>

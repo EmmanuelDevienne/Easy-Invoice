@@ -1,4 +1,5 @@
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 from django.db import models
 from django.template.defaultfilters import slugify
@@ -29,10 +30,10 @@ class Client(models.Model):
 
     def save(self, *args, **kwargs):
         if self.date_created is None:
-            self.date_created = datetime.now()
+            self.date_created = datetime.now(tz=ZoneInfo("Europe/Paris"))
 
         self.slug = slugify(f'{self.full_name} {self.phone_number}')
-        self.last_updated = datetime.now()
+        self.last_updated = datetime.now(tz=ZoneInfo("Europe/Paris"))
 
         super(Client, self).save(*args, **kwargs)
 
@@ -91,10 +92,10 @@ class Invoice(models.Model):
 
     def save(self, *args, **kwargs):
         if self.date_created is None:
-            self.date_created = datetime.now()
+            self.date_created = datetime.now(tz=ZoneInfo("Europe/Paris"))
 
         self.slug = slugify(f'{self.number}')
-        self.last_updated = datetime.now()
+        self.last_updated = datetime.now(tz=ZoneInfo("Europe/Paris"))
 
         super(Invoice, self).save(*args, **kwargs)
 
@@ -102,7 +103,7 @@ class Invoice(models.Model):
 class Product(models.Model):
     title = models.CharField(null=True, blank=True, max_length=100)
     description = models.TextField(null=True, blank=True)
-    quantity = models.FloatField(null=True, blank=True)
+    quantity = models.IntegerField(null=True, blank=True)
     price = models.FloatField(null=True, blank=True)
 
     # Related Fields
@@ -121,15 +122,15 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         if self.date_created is None:
-            self.date_created = datetime.now()
+            self.date_created = datetime.now(tz=ZoneInfo("Europe/Paris"))
 
         self.slug = slugify(f'{self.title} {self.price}')
-        self.last_updated = datetime.now()
+        self.last_updated = datetime.now(tz=ZoneInfo("Europe/Paris"))
 
         super(Product, self).save(*args, **kwargs)
 
 
-class Compagny(models.Model):
+class Company(models.Model):
     # Basic Fields
     full_name = models.CharField(null=True, blank=True, max_length=200)
     address_line1 = models.CharField(null=True, blank=True, max_length=200)
@@ -138,7 +139,7 @@ class Compagny(models.Model):
     phone_number = models.CharField(null=True, blank=True, max_length=100)
     email_address = models.CharField(null=True, blank=True, max_length=100)
     tax_number = models.CharField(null=True, blank=True, max_length=100)
-    clientLogo = models.ImageField(default='default_logo.jpg', upload_to='company_logos')
+    client_logo = models.ImageField(default='default_logo.jpg', upload_to='my_company_logo')
 
     # Utility fields
     slug = models.SlugField(max_length=500, unique=True, blank=True, null=True)
@@ -153,9 +154,9 @@ class Compagny(models.Model):
 
     def save(self, *args, **kwargs):
         if self.date_created is None:
-            self.date_created = datetime.now()
+            self.date_created = datetime.now(tz=ZoneInfo("Europe/Paris"))
 
         self.slug = slugify(f'{self.full_name}')
-        self.last_updated = datetime.now()
+        self.last_updated = datetime.now(tz=ZoneInfo("Europe/Paris"))
 
-        super(Compagny, self).save(*args, **kwargs)
+        super(Company, self).save(*args, **kwargs)

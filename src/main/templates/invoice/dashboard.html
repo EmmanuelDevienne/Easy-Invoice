@@ -5,7 +5,43 @@
 {% block title_section %}Dashboard{% endblock%}
 
 {% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mt-3 mb-3 border-bottom">
+    <h1 class="h2">Dashboard</h1>
+</div>
 
-<h1>This is my dashboard</h1>
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="card mb-5">
+                        <h5 class="card-header">Invoices</h5>
+                        <div class="card-body">
+                            <h5 class="card-title">Total Number of Invoices: {{invoices}}</h5><br>
+                            <h5 class="card-title">Paid Invoices: {{paid_invoices}}</h5><br><br>
+                            <a href="{% url 'invoice:invoices' %}" class="btn btn-primary ">View Invoices</a>
+                        </div>
+                    </div>
+
+                    <div class="card mb-5">
+                        <h5 class="card-header">Clients</h5>
+                        <div class="card-body">
+                            <h5 class="card-title">Total Number of Clients: {{clients}}</h5><br><br>
+                            <a href="{% url 'invoice:clients' %}" class="btn btn-primary">View Clients</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="p-5">
+                <img class=img-fluid src="{% static 'assets/img/empty.svg' %}" alt="">
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock%}
